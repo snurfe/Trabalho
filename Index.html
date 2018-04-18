@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template</title>
+</head>
+<body>
+    <h1>Cursos</h1>
+    <select id="sel">
+        <option value="Sel">Selecionar Curso</option>
+        <option value="Administração">Administração</option>
+        <option value="Direito">Direito</option>
+        <option value="Letras">Letras</option>
+        <option value="Jornalismo">Jornalismo</option>
+        <option value="Engenharia Quimica">Engenharia Quimica</option>
+        <option value="Engenharia de Computação">Engenharia de Computação</option>
+        <option value="Engenharia Mecanica">Engenharia Mecanica</option>
+        <option value="Automacao Industrial">Automacao Industrial</option>
+        <option value="Artes Visuais">Artes Visuais</option>
+        <option value="Medicina">Medicina</option>
+        <option value="Psicologia">Psicologia</option>
+        <option value="Fisioterapia">Fisioterapia</option>
+        <option value="Dança">Dança</option>
+        <option value="Educaçao Fisica">Educaçao Fisica</option>
+        <option value="Outro">Outro</option>
+    </select> <button id="btn">Selecionar</button>
+    <script>
+        function select(){
+            const sel=document.getElementById("sel").value;
+            if(sel!=="Outro" && sel!=="Sel"){
+                let v=true;
+                for(let i=0;i<usados.length;i++){
+                    if(sel===usados[i]){
+                        v=false;
+                    }
+                }
+                if(v){
+                    let div=document.createElement("div");
+                    div.addEventListener("click",function(){
+                        div.style.zIndex+=1;
+                    });
+                    div.addEventListener("dblclick",function(){
+                        for(let i=0;i<usados.length;i++){
+                            if(sel===usados[i]){
+                                usados[i]=null;
+                            }
+                        }
+                        document.body.removeChild(div);
+                    });
+                    div.append(sel);           
+                    document.body.append(div);
+                    usados.push(sel);
+                }
+                
+            }if(sel==="Outro"){
+                    let div=document.createElement("div");
+                    let textbox=document.createElement("INPUT");
+                    let confirm=document.createElement("button");
+                    div.append(textbox);
+                    div.append(confirm);
+                    document.body.append(div);
+                    let v=true;
+                    confirm.addEventListener("click", function(){
+                        text = textbox.value;
+                        for(let i=0;i<usados.length;i++){
+                            if(text===usados[i]){
+                                v=false;
+                            }
+                        }
+                        if(v){
+                            div.addEventListener("dblclick",function(){
+                                for(let i=0;i<usados.length;i++){
+                                    if(text===usados[i]){
+                                        usados[i]=null;
+                                    }
+                                }
+                                document.body.removeChild(div);
+                            });
+                            div.removeChild(textbox);
+                            div.removeChild(confirm);
+                            div.append(text); 
+                            usados.push(text);
+                        }else{
+                            document.body.removeChild(div);
+                        }     
+                    })
+                }
+            }
+        let usados=[];
+        bot=document.getElementById("btn");
+        bot.addEventListener('click' ,function(){
+            select()
+        })
+    </script>
+   </body>
+</html>
